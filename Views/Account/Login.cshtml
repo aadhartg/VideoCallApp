@@ -1,0 +1,55 @@
+﻿@using VideoCallConsultant.Models
+@model LoginViewModel
+@{
+    ViewBag.Title = "Consultant";
+}
+
+<div class="ag-body-bg">
+    <section class="ag-section ">
+        @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+        {
+            @Html.AntiForgeryToken()
+            <div class="container  center_div">
+                <div class="row justify-content-center">
+                    <div class="login-form col-12 p-3 d-flex align-items-center justify-content-center">                        
+                        <div class="middle-card px-lg-5 py-lg-5 ">
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            <div class="text-center mb-4">
+                                <strong> USER LOGIN </strong>
+                            </div>
+                            <form role="form">
+                                <div class="form-group">
+                                    <div class="input-group input-group-alternative">
+                                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control col-md-12", @placeholder = "Username" })
+                                        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="input-group input-group-alternative">
+                                        @Html.PasswordFor(m => m.Password, new { @class = "form-control col-md-12", @placeholder = "Password" })
+                                        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="text-center">
+                                    <input type="submit" value="Log in" class="btn btn-dark login-btn my-4 btn-lg">
+                                </div>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <input type="button" class="btn btn-dark register-btn btn-sm" title="Register" value="Register" onclick="location.href='/Account/Register'">
+                                    @Html.ActionLink("ForgotPassword?", "ForgotPassword", "Account", new { @class = "text-dark" })
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </section>
+
+
+    <section id="socialLoginForm">
+        @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
+    </section>
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

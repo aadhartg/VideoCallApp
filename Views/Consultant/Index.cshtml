@@ -1,0 +1,290 @@
+﻿@model VideoCallConsultant.ViewModels.BookingViewModel
+
+<!-- profile section start -->
+@Html.Partial("_Profile")
+<!-- profile section end -->
+<section class="ag-section mt-4 mb-5">
+    <div class="container">
+        <div class="middle-card calander ">
+            <div class="row">
+                <div class="col-md-4">
+                    <h3><i class="fas fa-play"></i> Sessions Available </h3>
+                </div>
+                <div class="col-md-8 text-right pt-3">
+                    <strong> Share now </strong>
+                    <div class="social-icons">
+                        <ul>
+                            @*<li>
+                                    <a href="#"><i class="fab fa-pinterest-p"></i></a>
+                                </li>*@
+                            @*<li>
+                                    <a href="https://twitter.com/intent/tweet"><i class="fab fa-twitter twitter-share-button"></i></a>
+                                </li>
+                                <li>
+                                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                                </li>
+                                <li>
+                                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                                </li>
+                                <li>
+                                    <a href="#"><i class="fas fa-envelope"></i></a>
+                                </li>*@
+                            <!-- Go to www.addthis.com/dashboard to customize your tools -->
+
+
+
+
+                            <li class="addthis_inline_share_toolbox"></li>
+                            @*<li class="sharethis-inline-share-buttons"></li>*@
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- tab section start -->
+            <section id="tabs" class="project-tab mt-3">
+                <div>
+                    <div class="row">
+                        <div class="col-md-12">
+
+                            <nav class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
+                                <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">
+                                    <div class="tab-title">Grooming Classes </div>
+                                    <div class="tab-subtitle">3 Hour Webinar <span class="price">$290 </span></div>
+                                    <span class="session-info"><i class="fas fa-info-circle"></i></span>
+                                    <span class="session-edit"><i class="fa fa-pencil" aria-hidden="true"></i> Edit</span>
+                                </a>
+                                <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">
+                                    <div class="tab-title title-free">Introductory Consultation</div>
+                                    <div class="tab-subtitle">10 Minutes <span class="price">Free </span></div>
+                                    <span class="session-info"><i class="fas fa-info-circle"></i></span>
+                                    <span class="session-edit"><i class="fa fa-pencil" aria-hidden="true"> </i> Edit</span>
+                                </a>
+                                <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">
+                                    <div class="tab-title">One-on-On</div>
+                                    <div class="tab-subtitle">60 minutes <span class="price">$50 </span></div>
+                                    <span class="session-info"><i class="fas fa-info-circle"></i></span>
+                                    <span class="session-edit"><i class="fa fa-pencil" aria-hidden="true"> </i> Edit</span>
+                                </a>
+                            </nav>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="tab-content" id="nav-tabContent">
+                                <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+                                    <div class="eventsTable table-responsive">
+                                        <table class="table" id="ThreeHourWebinar">
+                                            <thead>
+                                                <tr class="header">
+                                                    <th>
+                                                        <span class="day">@DateTime.UtcNow.DayOfWeek</span>
+                                                        <span class="date">@DateTime.Now.ToShortDateString()</span>
+                                                    </th>
+                                                    <th>
+                                                        <span class="day">@DateTime.UtcNow.AddDays(1).DayOfWeek</span>
+                                                        <span class="date">@DateTime.UtcNow.AddDays(1).ToShortDateString()</span>
+                                                    </th>
+                                                    <th>
+                                                        <span class="day">@DateTime.UtcNow.AddDays(2).DayOfWeek</span>
+                                                        <span class="date">@DateTime.UtcNow.AddDays(2).ToShortDateString()</span>
+                                                    </th>
+                                                    <th>
+                                                        <span class="day">@DateTime.UtcNow.AddDays(3).DayOfWeek</span>
+                                                        <span class="date">@DateTime.UtcNow.AddDays(3).ToShortDateString()</span>
+                                                    </th>
+                                                    <th>
+                                                        <span class="day">@DateTime.UtcNow.AddDays(4).DayOfWeek</span>
+                                                        <span class="date">@DateTime.UtcNow.AddDays(4).ToShortDateString()</span>
+                                                    </th>
+                                                    <th>
+                                                        <span class="day">@DateTime.UtcNow.AddDays(5).DayOfWeek</span>
+                                                        <span class="date">@DateTime.UtcNow.AddDays(5).ToShortDateString()</span>
+                                                    </th>
+                                                    <th>
+                                                        <span class="day">@DateTime.UtcNow.AddDays(6).DayOfWeek</span>
+                                                        <span class="date">@DateTime.UtcNow.AddDays(6).ToShortDateString()</span>
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+
+
+                                                @for (int i = 1; i < 15; i++)
+                                                {
+                                    <tr>
+                                        @{ var ThreeHourWebiner = Model.ThreeHourWebiner.Where(x => x.UTCStartTime.ToShortDateString() == DateTime.UtcNow.ToShortDateString() && (x.UTCStartTime.Hour <= i && x.UTCEndTime.Hour >= i)).FirstOrDefault(); }
+
+                                        @if (ThreeHourWebiner != null)
+                                        {
+                        <td class="Detail"><div class="badge orangeBg @("back_bg"+ThreeHourWebiner.ID) " data-toggle="modal" data-target="#exampleModal2">@i:00 AM</div></td> }
+                                        else
+                                        {
+                        <td></td>}
+                                        @{ var ThreeHourWebiner1 = Model.ThreeHourWebiner.Where(x => x.UTCStartTime.ToShortDateString() == DateTime.UtcNow.AddDays(1).ToShortDateString() && (x.UTCStartTime.Hour <= i && x.UTCEndTime.Hour >= i)).FirstOrDefault(); }
+                                        @if (ThreeHourWebiner1 != null)
+                                        {
+                        <td class="Detail"><div class="badge orangeBg @("back_bg"+ThreeHourWebiner1.ID)" data-toggle="modal" data-target="#exampleModal2">@i:00 AM</div></td> }
+                                        else
+                                        {
+                        <td></td>}
+                                        @{ var ThreeHourWebiner2 = Model.ThreeHourWebiner.Where(x => x.UTCStartTime.ToShortDateString() == DateTime.UtcNow.AddDays(2).ToShortDateString() && (x.UTCStartTime.Hour <= i && x.UTCEndTime.Hour >= i)).FirstOrDefault(); }
+                                        @if (ThreeHourWebiner2 != null)
+                                        {
+                        <td class="Detail"><div class="badge orangeBg @("back_bg"+ThreeHourWebiner2.ID)" data-toggle="modal" data-target="#exampleModal2">@i:00 AM</div></td> }
+                                        else
+                                        {
+                        <td></td>
+}
+
+                                        @{ var ThreeHourWebiner3 = Model.ThreeHourWebiner.Where(x => x.UTCStartTime.ToShortDateString() == DateTime.UtcNow.AddDays(3).ToShortDateString() && (x.UTCStartTime.Hour <= i && x.UTCEndTime.Hour >= i)).FirstOrDefault(); }
+                                        @if (ThreeHourWebiner3 != null)
+                                        {
+                        <td class="Detail"><div class="badge orangeBg @("back_bg"+ThreeHourWebiner3.ID)" data-toggle="modal" data-target="#exampleModal2">@i:00 AM</div></td> }
+                                        else
+                                        {
+                        <td></td>
+}
+                                        @{ var ThreeHourWebiner4 = Model.ThreeHourWebiner.Where(x => x.UTCStartTime.ToShortDateString() == DateTime.UtcNow.AddDays(4).ToShortDateString() && (x.UTCStartTime.Hour <= i && x.UTCEndTime.Hour >= i)).FirstOrDefault(); }
+                                        @if (ThreeHourWebiner4 != null)
+                                        {
+                        <td class="Detail"><div class="badge orangeBg @("back_bg"+ThreeHourWebiner4.ID)" data-toggle="modal" data-target="#exampleModal2">@i:00 AM</div></td> }
+                                        else
+                                        {
+                        <td></td>
+}
+                                        @{ var ThreeHourWebiner5 = Model.ThreeHourWebiner.Where(x => x.UTCStartTime.ToShortDateString() == DateTime.UtcNow.AddDays(5).ToShortDateString() && (x.UTCStartTime.Hour <= i && x.UTCEndTime.Hour >= i)).FirstOrDefault(); }
+                                        @if (ThreeHourWebiner5 != null)
+                                        {
+                        <td class="Detail"><div class="badge orangeBg @("back_bg"+ThreeHourWebiner5.ID)" data-toggle="modal" data-target="#exampleModal2">@i:00 AM</div></td> }
+                                        else
+                                        {
+                        <td></td>}
+                                        @{ var ThreeHourWebiner6 = Model.ThreeHourWebiner.Where(x => x.UTCStartTime.ToShortDateString() == DateTime.UtcNow.AddDays(6).ToShortDateString() && (x.UTCStartTime.Hour <= i && x.UTCEndTime.Hour >= i)).FirstOrDefault(); }
+                                        @if (ThreeHourWebiner6 != null)
+                                        {
+                        <td class="Detail"><div class="badge orangeBg @("back_bg"+ThreeHourWebiner6.ID)" data-toggle="modal" data-target="#exampleModal2">@i:00 AM</div></td> }
+                                        else
+                                        {
+                        <td></td>}
+
+                                    </tr>}
+
+                                            </tbody>
+
+                                        </table>
+
+                                    </div>
+                                </div>
+
+
+                                <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+                                    <div class="eventsTable table-responsive">
+                                        <table class="table" id="oneHourWebinar">
+                                            <thead>
+                                                <tr>
+                                                    <th>
+                                                        <span class="day">@DateTime.UtcNow.DayOfWeek</span>
+                                                        <span class="date">@DateTime.Now.ToShortDateString()</span>
+                                                    </th>
+                                                    <th>
+                                                        <span class="day">@DateTime.UtcNow.AddDays(1).DayOfWeek</span>
+                                                        <span class="date">@DateTime.UtcNow.AddDays(1).ToShortDateString()</span>
+                                                    </th>
+                                                    <th>
+                                                        <span class="day">@DateTime.UtcNow.AddDays(2).DayOfWeek</span>
+                                                        <span class="date">@DateTime.UtcNow.AddDays(2).ToShortDateString()</span>
+                                                    </th>
+                                                    <th>
+                                                        <span class="day">@DateTime.UtcNow.AddDays(3).DayOfWeek</span>
+                                                        <span class="date">@DateTime.UtcNow.AddDays(3).ToShortDateString()</span>
+                                                    </th>
+                                                    <th>
+                                                        <span class="day">@DateTime.UtcNow.AddDays(4).DayOfWeek</span>
+                                                        <span class="date">@DateTime.UtcNow.AddDays(4).ToShortDateString()</span>
+                                                    </th>
+                                                    <th>
+                                                        <span class="day">@DateTime.UtcNow.AddDays(5).DayOfWeek</span>
+                                                        <span class="date">@DateTime.UtcNow.AddDays(5).ToShortDateString()</span>
+                                                    </th>
+                                                    <th>
+                                                        <span class="day">@DateTime.UtcNow.AddDays(6).DayOfWeek</span>
+                                                        <span class="date">@DateTime.UtcNow.AddDays(6).ToShortDateString()</span>
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @for (int i = 1; i < 15; i++)
+                                                {
+                                                    var OneHourWebiner1 = Model.OneHourWebiner.Where(x => x.UTCStartTime.ToShortDateString() == DateTime.UtcNow.ToShortDateString() && (x.UTCStartTime.Hour <= i && x.UTCEndTime.Hour >= i)).FirstOrDefault();
+                                    <tr>
+                                        @if (@OneHourWebiner1 != null)
+                                        {
+                        <td class="Detail"><div class="badge orangeBg" data-toggle="modal" data-target="#exampleModal1Hour">@i:00 AM</div></td> }
+                                        else
+                                        {
+                        <td></td>}
+                                        @{ var OneHourWebiner2 = Model.OneHourWebiner.Where(x => x.UTCStartTime.ToShortDateString() == DateTime.UtcNow.AddDays(1).ToShortDateString() && (x.UTCStartTime.Hour <= i && x.UTCEndTime.Hour >= i)).FirstOrDefault(); }
+                                        @if (OneHourWebiner2 != null)
+                                        {
+                        <td class="Detail"><div class="badge orangeBg" data-toggle="modal" data-target="#exampleModal1Hour">@i:00 AM</div></td> }
+                                        else
+                                        {
+                        <td></td>
+}
+                                        @{ var OneHourWebiner3 = Model.OneHourWebiner.Where(x => x.UTCStartTime.ToShortDateString() == DateTime.UtcNow.AddDays(2).ToShortDateString() && (x.UTCStartTime.Hour <= i && x.UTCEndTime.Hour >= i)).FirstOrDefault(); }
+
+                                        @if (OneHourWebiner3 != null)
+                                        {
+                        <td class="Detail"><div class="badge orangeBg" data-toggle="modal" data-target="#exampleModal1Hour">@i:00 AM</div></td> }
+                                        else
+                                        {
+                        <td></td>}
+
+                                        @if (Model.OneHourWebiner.Where(x => x.UTCStartTime.ToShortDateString() == DateTime.UtcNow.AddDays(3).ToShortDateString() && (x.UTCStartTime.Hour <= i && x.UTCEndTime.Hour >= i)).FirstOrDefault() != null)
+                                        {
+                        <td class="Detail"><div class="badge orangeBg" data-toggle="modal" data-target="#exampleModal1Hour">@i:00 AM</div></td> }
+                                        else
+                                        {
+                        <td></td>}  @if (Model.OneHourWebiner.Where(x => x.UTCStartTime.ToShortDateString() == DateTime.UtcNow.AddDays(4).ToShortDateString() && (x.UTCStartTime.Hour <= i && x.UTCEndTime.Hour >= i)).FirstOrDefault() != null)
+                                        {
+                        <td class="Detail"><div class="badge orangeBg" data-toggle="modal" data-target="#exampleModal1Hour">@i:00 AM</div></td> }
+                                        else
+                                        {
+                        <td></td>}
+                        @if (Model.OneHourWebiner.Where(x => x.UTCStartTime.ToShortDateString() == DateTime.UtcNow.AddDays(5).ToShortDateString() && (x.UTCStartTime.Hour <= i && x.UTCEndTime.Hour >= i)).FirstOrDefault() != null)
+                        {
+        <td class="Detail"><div class="badge orangeBg" data-toggle="modal" data-target="#exampleModal1Hour">@i:00 AM</div></td> }
+                        else
+                        {
+        <td></td>}
+
+                        @if (Model.OneHourWebiner.Where(x => x.UTCStartTime.ToShortDateString() == DateTime.UtcNow.AddDays(6).ToShortDateString() && (x.UTCStartTime.Hour <= i && x.UTCEndTime.Hour >= i)).FirstOrDefault() != null)
+                        {
+        <td class="Detail"><div class="badge orangeBg" data-toggle="modal" data-target="#exampleModal1Hour">@i:00 AM</div></td> }
+                        else
+                        {
+        <td></td>}
+
+                    </tr>
+}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- tab section end -->
+        </div>
+    </div>
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
+</section>
+<!----Jvascript file -->
+<script src="https://code.jquery.com/jquery-2.2.0.min.js" type="text/javascript"></script>
+
+<script src="~/Content/js/bootstrap.min.js"></script>
+
